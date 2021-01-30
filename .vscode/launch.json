@@ -11,8 +11,10 @@
             "program": "${file}",
             "console": "integratedTerminal"
             "args": [
-                "-i", "libraries/fileIsImported.photoslibrary",
-                "-o", "exports",
+                "-i", "/Users/antonio/Developer/Photos Extract Tool/libraries/imported.photoslibrary",
+                "-o", "/Users/antonio/Developer/Photos Extract Tool/Exports",
+                "-e",
+                "-t",
                 "-v"
             ]
         }
