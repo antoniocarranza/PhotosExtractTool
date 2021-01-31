@@ -9,11 +9,10 @@
             "type": "python",
             "request": "launch",
             "program": "${file}",
-            "console": "integratedTerminal"
+            "console": "integratedTerminal",
             "args": [
-                "-i", "/Users/antonio/Developer/Photos Extract Tool/libraries/imported.photoslibrary",
-                "-o", "/Users/antonio/Developer/Photos Extract Tool/Exports",
-                "-e",
+                "-i", "/Users/antonio/Developer/PhotosExtractTool/libraries/linked.photoslibrary",
+                "-o", "/Volumes/WD1TB",
                 "-t",
                 "-v"
             ]

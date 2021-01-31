@@ -14,7 +14,10 @@ import sys, getopt
 from math import floor 
 from contextlib import closing
 
-# TODO: SQL para eliminar el Triger
+# TODO: Revisar que estoy tomando correctamente las versiones y sus fechas.
+#       Ademas hay que poner fileisreference a true en todas
+#       Por ultimo hay que enocontrar una forma de seleccionar el volumeId
+#       Cuando se trate de una unidad externa.
 
 # Apple considera el 1 de Enero de 2001 como partida del tiempo. epoch 978307200
 epochOffset = 978307200
@@ -51,7 +54,7 @@ def createTriggerMaster():
 def createTriggerVersion():
     return "CREATE TRIGGER RKVersion_ridIndexUpdateTrigger after update of isCloudQuarantined,videoCpVisibilityState,supportedStatus,colorSpaceValidationState,showInLibrary,fileIsReference,isFavorite,isInTrash,isHidden,faceDetectionIsFromPreview,hasKeywords,subType,specialType,momentUuid,burstPickType,graphProcessingState,type,mediaAnalysisProcessingState,playbackStyle,playbackVariation,renderEffect,groupingState,selfPortrait,outputUpToDate,syncFailureHidden,modelId,searchIndexInvalid,cloudLibraryState,hasBeenSynced on RKVersion begin select RKVersion_notifyRidIndexUpdate(new.modelId,old.isCloudQuarantined,old.videoCpVisibilityState,old.supportedStatus,old.colorSpaceValidationState,old.showInLibrary,old.fileIsReference,old.isFavorite,old.isInTrash,old.isHidden,old.faceDetectionIsFromPreview,old.hasKeywords,old.subType,old.specialType,old.momentUuid,old.burstPickType,old.graphProcessingState,old.type,old.mediaAnalysisProcessingState,old.playbackStyle,old.playbackVariation,old.renderEffect,old.groupingState,old.selfPortrait,old.outputUpToDate,old.syncFailureHidden,old.modelId,old.searchIndexInvalid,old.cloudLibraryState,old.hasBeenSynced,new.isCloudQuarantined,new.videoCpVisibilityState,new.supportedStatus,new.colorSpaceValidationState,new.showInLibrary,new.fileIsReference,new.isFavorite,new.isInTrash,new.isHidden,new.faceDetectionIsFromPreview,new.hasKeywords,new.subType,new.specialType,new.momentUuid,new.burstPickType,new.graphProcessingState,new.type,new.mediaAnalysisProcessingState,new.playbackStyle,new.playbackVariation,new.renderEffect,new.groupingState,new.selfPortrait,new.outputUpToDate,new.syncFailureHidden,new.modelId,new.searchIndexInvalid,new.cloudLibraryState,new.hasBeenSynced) from RKVersion where rowid=old.rowid; end;"
 def masterSQLUpdateCommand(masterId,newImagePath,newFileIsReference): 
-    return "UPDATE RKMaster SET imagePath='{imagePath}', fileIsReference={fileIsReference} WHERE modelId={modelId};".format(imagePath=newImagePath, fileIsReference=newFileIsReference, modelId=masterId)
+    return "UPDATE RKMaster SET imagePath='{imagePath}', fileIsReference={fileIsReference}, volumeId=3 WHERE modelId={modelId};".format(imagePath=newImagePath, fileIsReference=newFileIsReference, modelId=masterId)
 def versionSQLUpdateCommand(masterId,newFileIsReference): 
     return "UPDATE RKVersion SET fileIsReference={fileIsReference} WHERE modelId={modelId};".format(fileIsReference=newFileIsReference, modelId=masterId)
 
